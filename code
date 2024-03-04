@@ -1,0 +1,153 @@
+#####============ FILE HANDLING, MENU DRIVEN PROJECT============###########
+
+def createcontact():
+    name=input("Enter the name:")
+    name1=name.capitalize()
+    nm=input("Enter the mobile number:")
+    f=open("file.txt","a+")
+    if nm.isdigit() and len(nm)==10:
+        data=name1+ ":" +nm+"\n"
+        f.write(str(data))
+        print("CREATED SUCCESSFULLY")
+        f.close()
+    else:
+        print("Enter the valid mobile number")
+def viewcontact():
+    f=open("file.txt","r")
+    for i in f:
+    #data=f.readline()
+        print(i)
+    f.close()
+'''def updatecontact():
+    f=open("file.txt","a")
+    print(1.'''
+def updatecontact():
+    while True:
+        print("1.update by name by name")
+        print("2.update mobile number by name")
+        print("3.Exit")
+        ch=int(input("Enter your choice:"))
+        if ch==1:
+            f=open("file.txt","r")
+            data=f.readlines()
+            name=input("Enter the name which you want to update:")
+            new=input("Enter the new name")
+            cap=name.capitalize()
+            newcap=new.capitalize()
+            fw=open("file.txt","w")
+            for i in data:
+                sp=i.split(":")
+                if sp[0].capitalize()==cap:
+                    ss=newcap+":"+sp[1]+ "\n"
+                    fw.write(str(ss))
+                    print("Updated Successfulluy")
+                   
+                else:
+                    fw.write(i)
+            fw.close()
+            f.close()
+        elif ch==2:
+            f=open("file.txt","r")
+            data=f.readlines()
+            name=input("Enter the name to change the moblie number:")
+            cap=name.capitalize()
+            new_num=input("Enter the new number:")
+            fw=open("file.txt","w")
+            if new_num.isdigit() and len(new_num)==10:
+                for i in data:
+                    sp=i.split(":")
+                    if sp[0].capitalize()==cap:
+                        ss=cap+":"+new_num+"\n"
+                        fw.write(str(ss))
+                        print("Number updated successfully")
+                    else:
+                        fw.write(i)
+            else:
+                print("Check the number")
+            fw.close()
+            f.close()
+        elif ch==3:
+            break
+        else:
+            print("Wrong choice")
+                        
+                
+            
+
+def searchnamecontact():
+    search=input("Enter the contact name:")
+    cap=search.capitalize()
+    f=open("file.txt","r")
+    data=f.readlines()
+    for i in data:
+        sp=i.split(":")
+        if sp[0]==cap:
+            print(i)
+        '''else:
+            print("Name doesn't exit .check the name again")'''
+    f.close()
+def searchnumcontact():
+    
+    f=open("file.txt","r")
+    data=f.readlines()
+    #print(data)
+    num=input("Enter the mobile number:")
+    if num.isdigit() and len(num)==10:
+        for i in data:
+            sp=i.split(":")
+            #print(sp[1])
+            if len(sp)==2 and sp[1].strip()==num:
+               print(i.strip())
+    else:
+        print("Number is invalid.Enter the valid number")
+    
+    f.close()
+
+def deletecontact():
+    f=open("file.txt","r")
+    data=f.readlines()
+    name=input("Enter the name to  delete:")
+    cap=name.capitalize()
+    fw=open("file.txt","w")
+    for i in data:
+        sp=i.split(":")
+        '''if sp[0].capitalize()==cap:
+            data.remove(i)'''
+        if sp[0].capitalize()!=cap:
+            fw.write(i)
+            
+        else:
+            print("Deleted Successfully")
+    f.close()
+    fw.close()
+while True:
+    print("1.create contact")
+    print("2.view contact")
+    print("3.update contact")
+    print("4.search contact by name")
+    print("5.search contact by mobile number")
+    print("6.delete contact")
+    print("7.exit")
+    choice=int(input("Enter your choice:"))
+    if choice==1:
+        print("Creating new contact")
+        createcontact()
+    elif choice==2:
+        print("Viewing contact list")
+        viewcontact()
+    elif choice==3:
+        print("Updating the contact list")
+        updatecontact()
+    elif choice==4:
+        print("Serching contact by name")
+        searchnamecontact()
+    elif choice==5:
+        print("Searching contactby mobile number")
+        searchnumcontact()
+    elif choice==6:
+        print("deleting contact from the list")
+        deletecontact()
+    elif choice==7:
+        break
+    else:
+        print("Entered wrong number")
